@@ -1,4 +1,4 @@
-%global release_prefix          100
+%global release_prefix          1000
 
 Name:                           dhewm3
 Version:                        1.5.1
@@ -6,10 +6,8 @@ Release:                        %{release_prefix}%{?dist}
 Summary:                        Dhewm's Doom 3 engine
 License:                        GPLv3+ with exceptions
 URL:                            https://github.com/dhewm/%{name}
-Vendor:                         Package Store <https://pkgstore.github.io>
-Packager:                       Kitsune Solar <kitsune.solar@gmail.com>
 
-Source0:                        https://github.com/dhewm/%{name}/releases/download/%{version}/%{name}-%{version}-src.tar.xz
+Source0:                        %{name}-%{version}-src.tar.xz
 Source1:                        %{name}-README.txt
 
 Patch0:                         %{name}-no-cdkey.patch
@@ -53,13 +51,13 @@ iconv -f iso8859-1 -t utf-8 COPYING.txt > COPYING.txt.conv \
 export CXXFLAGS="%{optflags} -std=c++0x"
 # Passing a fake build name avoids default CMAKE_BUILD_TYPE="RelWithDebInfo"
 # which has hard coded GCC optimizations.
-%cmake \
+%{cmake} \
   -DCMAKE_BUILD_TYPE=Fedora \
   -DCORE=ON -DBASE=ON -DD3XP=ON \
   -DDEDICATED=ON \
   -DSDL2=ON \
   neo
-%cmake_build
+%{cmake_build}
 
 
 %post
@@ -73,7 +71,7 @@ fi
 
 
 %install
-%cmake_install
+%{cmake_install}
 
 
 %files
@@ -85,10 +83,14 @@ fi
 
 
 %changelog
-* Thu Jul 08 2021 Package Store <kitsune.solar@gmail.com> - 1.5.1-100
+* Mon Apr 04 2022 Package Store <pkgstore@mail.ru> - 1.5.1-1000
+- UPD: Rebuild by Package Store.
+- UPD: File "dhewm3.spec".
+
+* Thu Jul 08 2021 Package Store <pkgstore@mail.ru> - 1.5.1-100
 - NEW: 1.5.1.
 
-* Mon Jul 08 2019 Package Store <kitsune.solar@gmail.com> - 1.5.0-100
+* Mon Jul 08 2019 Package Store <pkgstore@mail.ru> - 1.5.0-100
 - NEW: 1.5.0.
 - UPD: Move to Package Store.
 

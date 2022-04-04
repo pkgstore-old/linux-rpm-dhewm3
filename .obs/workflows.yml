@@ -2,4 +2,4 @@ workflow:
   steps:
     - branch_package:
         source_project: home:pkgstore:rpm
-        source_package: brotli
+        source_package: dhewm3
